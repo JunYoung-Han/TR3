@@ -15,7 +15,9 @@ public:
 
 public:
     void    SelectJob(void);
-
+    void    COMBAT_WIN(int _iExp, int _iMoney);
+    void    COMBAT_LOSE(void);
+    void    COMBAT_RUN(void);
 
 private:
 };

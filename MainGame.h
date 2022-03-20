@@ -1,6 +1,7 @@
 #pragma once
 #include "Obj.h"
 #include "Player.h"
+#include "Field.h"
 
 class CMainGame
 {
@@ -17,5 +18,5 @@ private:
 
 private:
 	CObj* m_pPlayer;
+	CField* m_pField;
 };
-

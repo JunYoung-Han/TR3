@@ -38,7 +38,13 @@ void CMainGame::Update(void)
 		{
 
 		case 1:
-
+			if (nullptr == m_pField)
+			{
+				m_pField = new CField();
+				m_pField->Initialize();
+				m_pField->Set_Player(m_pPlayer);
+			}
+			m_pField->Update();
 			break;
 
 		case 2:

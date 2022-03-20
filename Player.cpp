@@ -27,7 +27,7 @@ void CPlayer::Render()
 	cout << "이름 : " << m_tInfo.szName << endl;
 	cout << "레벨 : " << m_tInfo.iLevel << endl;
 	cout << "공격력 : " << m_tInfo.iAttack << endl;
-	cout << "체력 / 최대 체력 : " << m_tInfo.iMaxHp << " / " << m_tInfo.iMaxHp << endl;
+	cout << "체력 / 최대 체력 : " << m_tInfo.iHp << " / " << m_tInfo.iMaxHp << endl;
 	cout << "경험치 / 최대 경험치 : " << m_tInfo.iExp << " / " << m_tInfo.iMaxExp << endl;
 	cout << "소지금 : " << m_tInfo.iMoney << endl;
 	cout << "==========================" << endl;
@@ -89,4 +89,29 @@ void CPlayer::SelectJob(void)
 	default:
 		break;
 	}
+}
+
+void CPlayer::COMBAT_WIN(int _iExp, int _iMoney)
+{
+	m_tInfo.iExp += _iExp;
+	m_tInfo.iMoney += _iMoney;
+
+	if (m_tInfo.iExp >= m_tInfo.iMaxExp)
+	{
+		++m_tInfo.iLevel;
+		m_tInfo.iMaxExp *= 1.1;
+		m_tInfo.iMaxHp *= 1.1;
+		m_tInfo.iAttack *= 1.1;
+		m_tInfo.iHp = m_tInfo.iMaxHp;
+	}
+}
+
+void CPlayer::COMBAT_LOSE(void)
+{
+	m_tInfo.iExp = 0;
+}
+
+void CPlayer::COMBAT_RUN(void)
+{
+	m_tInfo.iMoney >> 1;
 }
