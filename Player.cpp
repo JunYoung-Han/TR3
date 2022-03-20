@@ -109,9 +109,32 @@ void CPlayer::COMBAT_WIN(int _iExp, int _iMoney)
 void CPlayer::COMBAT_LOSE(void)
 {
 	m_tInfo.iExp = 0;
+	m_tInfo.iHp = m_tInfo.iMaxHp;
+	m_tInfo.iMoney >> 1;
 }
 
 void CPlayer::COMBAT_RUN(void)
 {
 	m_tInfo.iMoney >> 1;
+}
+
+void CPlayer::Load_Data(void)
+{
+	FILE* fp = nullptr;
+	errno_t err = fopen_s(&fp, "../Data/Save_Player.dat", "rb");
+
+	if (0 == err)
+	{
+		INFO tInfo = {};
+
+		fread(&tInfo, sizeof(INFO), 1, fp);
+
+		m_tInfo = tInfo;
+
+		cout << "캐릭터 정보 불러오기 성공" << endl;
+		fclose(fp);
+	}
+	else
+		cout << "캐릭터 정보 불러오기 실패" << endl;
+	system("pause");
 }

@@ -19,5 +19,9 @@ public:
     void    COMBAT_LOSE(void);
     void    COMBAT_RUN(void);
 
+
+private:
+    void    Load_Data(void);
+
 private:
 };

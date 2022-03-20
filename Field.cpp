@@ -56,11 +56,11 @@ void CField::Update()
 		case COMBAT::COMBAT_WIN:
 			dynamic_cast<CPlayer*>(m_pPlayer)->COMBAT_WIN(m_pMonster->Get_Info().iExp, m_pMonster->Get_Info().iMoney);
 			break;
-			
+
 		case COMBAT::COMBAT_LOSE:
 			dynamic_cast<CPlayer*>(m_pPlayer)->COMBAT_LOSE();
 			break;
-			
+
 		case COMBAT::COMBAT_RUN:
 			dynamic_cast<CPlayer*>(m_pPlayer)->COMBAT_RUN();
 			break;
@@ -68,6 +68,7 @@ void CField::Update()
 		default:
 			break;
 		}
+		Release();
 	}
 }
 
@@ -94,15 +95,17 @@ COMBAT CField::Fight()
 			m_pMonster->Set_Damage(m_pPlayer->Get_Info().iAttack);
 			m_pPlayer->Set_Damage(m_pMonster->Get_Info().iAttack);
 
-			if (0 >= m_pMonster->Get_Info().iHp)
-			{
-				cout << "½Â¸®" << endl;
-				return COMBAT::COMBAT_WIN;
-			}
 			if (0 >= m_pPlayer->Get_Info().iHp)
 			{
 				cout << "ÇÃ·¹ÀÌ¾î »ç¸Á" << endl;
+				system("pause");
 				return COMBAT::COMBAT_LOSE;
+			}
+			if (0 >= m_pMonster->Get_Info().iHp)
+			{
+				cout << "½Â¸®" << endl;
+				system("pause");
+				return COMBAT::COMBAT_WIN;
 			}
 			break;
 

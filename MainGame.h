@@ -17,6 +17,9 @@ private:
 	void	Release(void);
 
 private:
+	void Save_Data(void);
+
+private:
 	CObj* m_pPlayer;
 	CField* m_pField;
 };

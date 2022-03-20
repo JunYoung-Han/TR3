@@ -3,6 +3,7 @@
 
 CMainGame::CMainGame()
 	: m_pPlayer(nullptr)
+	, m_pField(nullptr)
 {
 }
 
@@ -70,4 +71,18 @@ void CMainGame::Update(void)
 void CMainGame::Release(void)
 {
 	Safe_Delete<CObj*>(m_pPlayer);
+}
+
+void CMainGame::Save_Data(void)
+{
+	FILE* fp = nullptr;
+	errno_t err = fopen_s(&fp, "../Data/Save_Player.dat", "wb");
+
+	if (0 == err)
+	{
+		fwrite(&(m_pPlayer->Get_Info()), sizeof(INFO), 1, fp);
+
+		cout << "캐릭터 정보 저장 성공" << endl;
+		fclose(fp);
+	}
 }
