@@ -21,6 +21,12 @@ void CMainGame::Initialize(void)
 	}
 	dynamic_cast<CPlayer*>(m_pPlayer)->SelectJob();
 
+	if (nullptr == m_pInven)
+	{
+		m_pInven = new CInven;
+		m_pInven->Set_Player(m_pPlayer);
+		m_pInven->Initialize();
+	}
 }
 
 void CMainGame::Update(void)
@@ -53,10 +59,12 @@ void CMainGame::Update(void)
 			break;
 
 		case 3:
-
+			if (nullptr != m_pInven)
+				m_pInven->Update();
 			break;
 
 		case 4:
+			Save_Data();
 			break;
 
 		case 5:
@@ -85,4 +93,7 @@ void CMainGame::Save_Data(void)
 		cout << "캐릭터 정보 저장 성공" << endl;
 		fclose(fp);
 	}
+	else
+		cout << "캐릭터 저장 실패" << endl;
+	system("pause");
 }

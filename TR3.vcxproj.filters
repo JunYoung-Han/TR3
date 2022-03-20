@@ -62,6 +62,12 @@
     <ClCompile Include="Field.cpp">
       <Filter>02. Scene\00. Field</Filter>
     </ClCompile>
+    <ClCompile Include="Inven.cpp">
+      <Filter>02. Scene\02. Inven</Filter>
+    </ClCompile>
+    <ClCompile Include="Store.cpp">
+      <Filter>02. Scene\01. Store</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -87,6 +93,12 @@
     </ClInclude>
     <ClInclude Include="Define.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inven.h">
+      <Filter>02. Scene\02. Inven</Filter>
+    </ClInclude>
+    <ClInclude Include="Store.h">
+      <Filter>02. Scene\01. Store</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

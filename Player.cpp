@@ -56,7 +56,7 @@ void CPlayer::SelectJob(void)
 		m_tInfo.iLevel = 1;
 		m_tInfo.iMoney = 100000;
 		break;
-		
+
 	case 2:
 		strcpy_s(m_tInfo.szName, 32, "마법사");
 		m_tInfo.iAttack = 10;
@@ -67,7 +67,7 @@ void CPlayer::SelectJob(void)
 		m_tInfo.iLevel = 1;
 		m_tInfo.iMoney = 100000;
 		break;
-		
+
 	case 3:
 		strcpy_s(m_tInfo.szName, 32, "도적");
 		m_tInfo.iAttack = 10;
@@ -78,11 +78,11 @@ void CPlayer::SelectJob(void)
 		m_tInfo.iLevel = 1;
 		m_tInfo.iMoney = 100000;
 		break;
-		
+
 	case 4:
 		// Load_Date();
 		break;
-		
+
 	case 5:
 		break;
 
@@ -116,6 +116,61 @@ void CPlayer::COMBAT_LOSE(void)
 void CPlayer::COMBAT_RUN(void)
 {
 	m_tInfo.iMoney >> 1;
+}
+
+void CPlayer::Equip_Item(CObj* _pItem)
+{
+	// 인자 아이템의 타입 받아온 뒤,
+	// 기존 아이템 장착 유무 확인 후 
+	// 유 ) 해제 후 장착
+	// - 해당 아이템의 능력치 적용 수치 제거
+	// - 해당 슬롯 비우기 
+	// 무 ) 장착
+	//
+
+	// 매개변수 아이템의 아이템 타입 받아옴.
+	ITEMTYPE	eItemType = dynamic_cast<CItem*>(_pItem)->Get_ItemType();
+
+	// 기존에 장착되어있는 아이템이 있을 경우, 먼저 그 아이템 해제함.
+	// 아이템 삭제가 아닌 장착해제이기 때문에 아이템을 Delete 할 필요는 없음.
+	if (nullptr != m_pEquip_slot[(int)eItemType])
+	{
+		// 아이템 능력치 해제
+		Adjust_ItemAbility(m_pEquip_slot[(int)eItemType], false);
+		// 기존 아이템 장착 상태 변경
+		dynamic_cast<CItem*>(m_pEquip_slot[(int)eItemType])->Set_Equip(false);
+		// 해당 장비 슬롯 비우기
+		m_pEquip_slot[(int)eItemType] = nullptr;
+	}
+	
+	// 아이템 장착
+	// 아이템 능력치 적용
+	Adjust_ItemAbility(_pItem, true);
+	// 해당 장비 슬롯 채우기
+	m_pEquip_slot[(int)eItemType] = _pItem;
+	// 해당 아이템 장착 상태 변경
+	dynamic_cast<CItem*>(m_pEquip_slot[(int)eItemType])->Set_Equip(true);
+}
+
+void CPlayer::Unequip_Item(CObj* _pItem)
+{
+	ITEMTYPE	eItemType = dynamic_cast<CItem*>(_pItem)->Get_ItemType();
+	if (nullptr != m_pEquip_slot[(int)eItemType])
+	{
+		// 아이템 능력치 해제
+		Adjust_ItemAbility(m_pEquip_slot[(int)eItemType], false);
+		// 기존 아이템 장착 상태 변경
+		dynamic_cast<CItem*>(m_pEquip_slot[(int)eItemType])->Set_Equip(false);
+		// 해당 장비 슬롯 비우기
+		m_pEquip_slot[(int)eItemType] = nullptr;
+	}
+}
+
+void CPlayer::Adjust_ItemAbility(CObj* _pItem, bool _bEquipStatus)
+{
+	int iAddorSub = _bEquipStatus ? 1 : -1;
+	m_tInfo.iAttack += (iAddorSub)*_pItem->Get_Info().iAttack;
+	m_tInfo.iHp += (iAddorSub)*_pItem->Get_Info().iHp;
 }
 
 void CPlayer::Load_Data(void)

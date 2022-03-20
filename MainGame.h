@@ -2,6 +2,7 @@
 #include "Obj.h"
 #include "Player.h"
 #include "Field.h"
+#include "Inven.h"
 
 class CMainGame
 {
@@ -22,4 +23,5 @@ private:
 private:
 	CObj* m_pPlayer;
 	CField* m_pField;
+	CInven* m_pInven;
 };
