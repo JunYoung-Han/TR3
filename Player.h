@@ -26,6 +26,7 @@ public:
     void    Equip_Item(CObj* _pItem);
     void    Unequip_Item(CObj* _pItem);
     void    Adjust_ItemAbility(CObj* _pItem, bool _bEquipStatus);
+    void    Plus_Money(int _iMoney) { m_tInfo.iMoney += _iMoney; }
 
 private:
     void    Load_Data(void);

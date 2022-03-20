@@ -4,11 +4,13 @@
 CPlayer::CPlayer()
 	: CObj()
 {
+	memset(m_pEquip_slot, 0, sizeof(m_pEquip_slot));
 }
 
 CPlayer::CPlayer(const char* _Name, int _iAttack, int _iMaxHp, int _iLevel)
 	: CObj(_Name, _iAttack, _iMaxHp, _iLevel)
 {
+	memset(m_pEquip_slot, 0, sizeof(m_pEquip_slot));
 }
 
 CPlayer::~CPlayer()
@@ -80,7 +82,7 @@ void CPlayer::SelectJob(void)
 		break;
 
 	case 4:
-		// Load_Date();
+		Load_Data();
 		break;
 
 	case 5:
@@ -142,7 +144,7 @@ void CPlayer::Equip_Item(CObj* _pItem)
 		// 해당 장비 슬롯 비우기
 		m_pEquip_slot[(int)eItemType] = nullptr;
 	}
-	
+
 	// 아이템 장착
 	// 아이템 능력치 적용
 	Adjust_ItemAbility(_pItem, true);
@@ -170,7 +172,8 @@ void CPlayer::Adjust_ItemAbility(CObj* _pItem, bool _bEquipStatus)
 {
 	int iAddorSub = _bEquipStatus ? 1 : -1;
 	m_tInfo.iAttack += (iAddorSub)*_pItem->Get_Info().iAttack;
-	m_tInfo.iHp += (iAddorSub)*_pItem->Get_Info().iHp;
+	m_tInfo.iMaxHp += (iAddorSub)*_pItem->Get_Info().iHp;
+	m_tInfo.iHp = m_tInfo.iMaxHp;
 }
 
 void CPlayer::Load_Data(void)
@@ -191,5 +194,6 @@ void CPlayer::Load_Data(void)
 	}
 	else
 		cout << "캐릭터 정보 불러오기 실패" << endl;
+
 	system("pause");
 }

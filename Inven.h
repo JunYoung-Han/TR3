@@ -18,7 +18,7 @@ public:
 	void	Equip_Item();
 	void	Unequip_Item();
 	void	Render_All();
-	void	Render_Equipped();
+	void	Render_Selective(bool _isEquipped);
 	bool	Is_BuyItem(CObj* _pItem);
 	bool	Is_SellItem(int _iSelect, int& _iMoney);
 

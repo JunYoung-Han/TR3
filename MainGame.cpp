@@ -55,7 +55,14 @@ void CMainGame::Update(void)
 			break;
 
 		case 2:
-
+			if (nullptr == m_pStore)
+			{
+				m_pStore = new CStore;
+				m_pStore->Initialize();
+				m_pStore->Set_Player(m_pPlayer);
+				m_pStore->Set_Inven(m_pInven);
+			}
+			m_pStore->Update();
 			break;
 
 		case 3:

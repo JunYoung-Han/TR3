@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Field.h"
 #include "Inven.h"
+#include "Store.h"
 
 class CMainGame
 {
@@ -24,4 +25,5 @@ private:
 	CObj* m_pPlayer;
 	CField* m_pField;
 	CInven* m_pInven;
+	CStore* m_pStore;
 };
